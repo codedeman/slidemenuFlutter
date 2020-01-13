@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:slidemenu/search/search.dart';
 
 import 'authenticate/sign_in.dart';
 import 'authenticate/sign_up.dart';
 import 'home/menu_dasboard.dart';
-import 'home/slideMenu.dart';
+import 'home/home.dart';
 
 
 void main() => runApp(MyApp());
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: SearchPage(),
     );
   }
 }

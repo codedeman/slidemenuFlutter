@@ -15,6 +15,7 @@ class _ListPageState extends State<ListPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(title: Text('Baby Name Votes')),
       body: _buildBody(context),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:slidemenu/home/slideMenu.dart';
+import 'package:slidemenu/home/home.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -18,8 +18,6 @@ class _LoginPageState extends State<LoginPage> {
       body: Form(
         key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-
             children: <Widget>[
           TextFormField(
             validator: (input) {
@@ -63,11 +61,7 @@ class _LoginPageState extends State<LoginPage> {
 
       try {
         AuthResult user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-
-//        FirebaseUser user = (await FirebaseAuth.instance
-//            .signInWithEmailAndPassword(
-//            email: _email, password: _password)) as FirebaseUser;
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ListPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ListPage()));
 
         print("Success");
       } catch (e) {
