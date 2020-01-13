@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'authenticate/sign_in.dart';
+import 'authenticate/sign_up.dart';
 import 'home/menu_dasboard.dart';
 import 'home/slideMenu.dart';
 
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MenuDasboardPage(),
+      home: LoginPage(),
     );
   }
 }

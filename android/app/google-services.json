@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "34010299247",
+    "firebase_url": "https://datawarehouse-56414.firebaseio.com",
+    "project_id": "datawarehouse-56414",
+    "storage_bucket": "datawarehouse-56414.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34010299247:android:4ebda9791d506c4730469a",
+        "android_client_info": {
+          "package_name": "com.kevinpham.slidemenu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34010299247-fugfj1r9dvrs4v2ufip0ppp1ea2mcql3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTl8LW2uEGXEf5NXobA3cqRftsS1GrvGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34010299247-fugfj1r9dvrs4v2ufip0ppp1ea2mcql3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "34010299247-sp0lfaio1sc88mcpqbj82rf1rlc22qrv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kevinpham.parsejson"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

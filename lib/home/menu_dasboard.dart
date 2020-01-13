@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
 //const background = const Color(0xffb74093);
 final Color backgroundColor = Color(0xffb74093);
 
@@ -19,7 +20,6 @@ class _MenuDasboardPageState extends State<MenuDasboardPage> with SingleTickerPr
   Animation<double> _menuScaleAnimation;
 
   Animation<Offset> _slideAnimation;
-
 
   @override
   void initState() {
