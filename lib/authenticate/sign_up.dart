@@ -1,58 +1,68 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-
-
-class SearchPage extends StatefulWidget {
-  @override
-  _SearchPageState createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
-  String name = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: TextField(
-            onChanged: (val) => initiateSearch(val),
-          ),
-        ),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: name != "" && name != null
-              ? Firestore.instance
-              .collection('brands')
-              .where("name", arrayContains: name)
-              .snapshots()
-              : Firestore.instance.collection("bandnames").snapshots(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
-
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return new Text('Loading...');
-              default:
-                return new ListView(
-                  children:
-                  snapshot.data.documents.map((DocumentSnapshot document) {
-                    return new ListTile(
-                      title: new Text(document['name']),
-                    );
-                  }).toList(),
-                );
-            }
-          },
-        ),
-      ),
-    );
-  }
-
-  void initiateSearch(String val) {
-    setState(() {
-      name = val.toLowerCase().trim();
-    });
-  }
-}
+//import 'package:flutter/material.dart';
+//import 'package:intl/intl.dart';
+//
+//import '../models/transaction.dart';
+//
+//class TransactionList extends StatelessWidget {
+//  final List<Transaction> transactions;
+//
+//  TransactionList(this.transactions);
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    return Container(
+//      height: 300,
+//      child: SingleChildScrollView(
+//        child: Column(
+//          children: transactions.map((tx) {
+//            return Card(
+//              child: Row(
+//                children: <Widget>[
+//                  Container(
+//                    margin: EdgeInsets.symmetric(
+//                      vertical: 10,
+//                      horizontal: 15,
+//                    ),
+//                    decoration: BoxDecoration(
+//                      border: Border.all(
+//                        color: Colors.purple,
+//                        width: 2,
+//                      ),
+//                    ),
+//                    padding: EdgeInsets.all(10),
+//                    child: Text(
+//                      '\$${tx.amount}',
+//                      style: TextStyle(
+//                        fontWeight: FontWeight.bold,
+//                        fontSize: 20,
+//                        color: Colors.purple,
+//                      ),
+//                    ),
+//                  ),
+//                  Column(
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      Text(
+//                        tx.title,
+//                        style: TextStyle(
+//                          fontSize: 16,
+//                          fontWeight: FontWeight.bold,
+//                        ),
+//                      ),
+//                      Text(
+//                        DateFormat.yMMMd().format(tx.date),
+//                        style: TextStyle(
+//                          color: Colors.grey,
+//                        ),
+//                      ),
+//                    ],
+//                  ),
+//                ],
+//              ),
+//            );
+//          }).toList(),
+//        ),
+//      ),
+//    );
+//  }
+//}
