@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:slidemenu/authenticate/sign_up.dart';
 import 'package:slidemenu/search/search.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:geolocator/geolocator.dart';
 
 
 class ListPage extends StatefulWidget{
@@ -13,6 +16,34 @@ class ListPage extends StatefulWidget{
 }
 
 class _ListPageState extends State<ListPage>{
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkGPS();
+  }
+
+  var geolocator = Geolocator();
+
+
+
+  checkGPS() async {
+
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+
+    print(position == null ? 'Unknown' : position.latitude.toString() + ', ' + position.longitude.toString());
+
+
+//      StreamSubscription<Position> positionStream = geolocator.getPositionStream(locationOptions).listen(
+//          (Position position) {
+//        print(position == null ? 'Unknown' : position.latitude.toString() + ', ' + position.longitude.toString());
+//      });
+
+
+  }
+
+
 
   _callPhone(String phone) async {
     if (await canLaunch(phone)) {
@@ -38,9 +69,7 @@ class _ListPageState extends State<ListPage>{
       ),
 
       drawer: Drawer(
-
         child: ListView(
-
           padding: EdgeInsets.zero,
             children: const <Widget>[
                 DrawerHeader(
@@ -60,7 +89,6 @@ class _ListPageState extends State<ListPage>{
       bottomNavigationBar: BottomNavigationBar(
 
           items: const <BottomNavigationBarItem>[
-
             BottomNavigationBarItem(
               icon: Icon(Icons.directions_bus),
               title: Text('Home'),
@@ -81,11 +109,12 @@ class _ListPageState extends State<ListPage>{
     );
   }
   Widget _buildBody(BuildContext context) {
+
     return StreamBuilder<QuerySnapshot>(
+
       stream: Firestore.instance.collection('bandnames').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
-
         return _buildList(context, snapshot.data.documents);
       },
     );
@@ -115,7 +144,10 @@ class _ListPageState extends State<ListPage>{
               color: Colors.red,
               icon: Icon(Icons.directions_bus) ),
           title: Text(record.name),
-          subtitle: Text(record.station+"->"),
+
+          subtitle: Text(record.station+"->"+record.destination),
+
+//          Text(record.station+"->"+record.destination),
           trailing: IconButton(icon: Icon(Icons.phone) , onPressed: (){
 
             _callPhone(record.phone);
@@ -137,18 +169,6 @@ class _ListPageState extends State<ListPage>{
 
 }
 
-//Widget layout(String name,int vote){
-//
-//  return Container(
-//
-//    child: ListTile(
-//
-//      title: Text(name),
-//    ),
-//  )
-//
-//
-//}
 
 
 
@@ -176,8 +196,6 @@ class Record {
         phone =  map['phone'],
         station = map['station'],
         destination = map['destination'];
-
-
 
   Record.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
